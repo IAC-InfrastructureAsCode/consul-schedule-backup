@@ -1,0 +1,5 @@
+## Daily Backup K/V at 1.00pm
+0 1 * * * /bin/sh /root/cs-backup-daily.sh
+
+## Weekly Backup K/V at 2.00pm Friday
+0 2 * * 5 /bin/sh /root/cs-backup-weekly.sh

@@ -7,8 +7,8 @@
 # -----------------------------------------------------------------------------
 
 PATH_SNAPSHOT="/root/consul-snapshot"
-PATH_DAILY="weekly"
-PATH_BACKUP=$PATH_SNAPSHOT"/"$PATH_DAILY
+PATH_DIR="weekly"
+PATH_BACKUP=$PATH_SNAPSHOT"/"$PATH_DIR
 TOKEN_AUTH_PROD="[YOUR_PROD_ACL_MASTER_TOKEN]"
 TOKEN_AUTH_STAGING="[YOUR_STAGING_ACL_MASTER_TOKEN]"
 
@@ -40,7 +40,7 @@ run_export() {
 main() {
   create_snapshot_folder
   run_snapshot
-  #run_export
+  run_export
 }
 
 ### START HERE ###

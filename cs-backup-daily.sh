@@ -30,11 +30,11 @@ create_snapshot_folder(){
 
 run_snapshot() {
   select_env
-  consul snapshot save -token=$ENV_TOKEN $PATH_BACKUP/$SNAPSHOT_FILE.snap
+  /usr/local/bin/consul snapshot save -token=$ENV_TOKEN $PATH_BACKUP/$SNAPSHOT_FILE.snap
 }
 
 run_export() {
-  consul kv export > $PATH_BACKUP/$SNAPSHOT_FILE.json
+  /usr/local/bin/consul kv export > $PATH_BACKUP/$SNAPSHOT_FILE.json
 }
 
 main() {

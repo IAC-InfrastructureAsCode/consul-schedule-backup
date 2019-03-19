@@ -7,13 +7,14 @@
 # -----------------------------------------------------------------------------
 
 export PATH_SNAPSHOT="/root/consul-snapshot"
-export PATH_DIR="weekly"
+export PATH_DIR="daily"
 export PATH_BACKUP=$PATH_SNAPSHOT"/"$PATH_DIR
 export TOKEN_AUTH_PROD="[YOUR_PROD_ACL_MASTER_TOKEN]"
 export TOKEN_AUTH_STAGING="[YOUR_STAGING_ACL_MASTER_TOKEN]"
+export IMPORT_JSON="/root/consul-snaphost/import.json"
 
 export ENV="0"    # (0 = staging, 1 = production)
-export SNAPSHOT_FILE="week-"$(date +%V)
+export SNAPSHOT_FILE=$(date +%Y-%m-%d)
 
 select_env() {
   if [ "$ENV" = "0" ]
@@ -24,23 +25,13 @@ select_env() {
   fi
 }
 
-create_snapshot_folder(){
-  mkdir -p $PATH_BACKUP
-}
-
-run_snapshot() {
+run_import() {
   select_env
-  /usr/local/bin/consul snapshot save -token=$ENV_TOKEN $PATH_BACKUP/$SNAPSHOT_FILE.snap
-}
-
-run_export() {
-  /usr/local/bin/consul kv export -token=$ENV_TOKEN / > $PATH_BACKUP/$SNAPSHOT_FILE.json
+  /usr/local/bin/consul kv import -token=$ENV_TOKEN @$IMPORT_JSON
 }
 
 main() {
-  create_snapshot_folder
-  run_snapshot
-  run_export
+  run_import
 }
 
 ### START HERE ###

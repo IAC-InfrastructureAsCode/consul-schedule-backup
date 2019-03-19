@@ -34,7 +34,7 @@ run_snapshot() {
 }
 
 run_export() {
-  /usr/local/bin/consul kv export / > $PATH_BACKUP/$SNAPSHOT_FILE.json
+  /usr/local/bin/consul kv export -token=$ENV_TOKEN / > $PATH_BACKUP/$SNAPSHOT_FILE.json
 }
 
 main() {

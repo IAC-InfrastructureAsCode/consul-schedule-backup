@@ -6,21 +6,21 @@
 #  License    : Apache version 2.0
 # -----------------------------------------------------------------------------
 
-PATH_SNAPSHOT="/root/consul-snapshot"
-PATH_DIR="weekly"
-PATH_BACKUP=$PATH_SNAPSHOT"/"$PATH_DIR
-TOKEN_AUTH_PROD="[YOUR_PROD_ACL_MASTER_TOKEN]"
-TOKEN_AUTH_STAGING="[YOUR_STAGING_ACL_MASTER_TOKEN]"
+export PATH_SNAPSHOT="/root/consul-snapshot"
+export PATH_DIR="weekly"
+export PATH_BACKUP=$PATH_SNAPSHOT"/"$PATH_DIR
+export TOKEN_AUTH_PROD="[YOUR_PROD_ACL_MASTER_TOKEN]"
+export TOKEN_AUTH_STAGING="[YOUR_STAGING_ACL_MASTER_TOKEN]"
 
-ENV="0"    # (0 = staging, 1 = production)
-SNAPSHOT_FILE="week-"$(date +%V)
+export ENV="0"    # (0 = staging, 1 = production)
+export SNAPSHOT_FILE="week-"$(date +%V)
 
 select_env() {
   if [ "$ENV" = "0" ]
   then
-    ENV_TOKEN="$TOKEN_AUTH_STAGING"
+    export ENV_TOKEN="$TOKEN_AUTH_STAGING"
   else
-    ENV_TOKEN="$TOKEN_AUTH_PROD"
+    export ENV_TOKEN="$TOKEN_AUTH_PROD"
   fi
 }
 

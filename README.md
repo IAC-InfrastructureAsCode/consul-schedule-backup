@@ -18,6 +18,9 @@ Schedule backup (snapshot) for consul key/value with cronjob
   ```
 * Add last line:
   ```
+  ## Daily Backup K/V every 30 minutes
+  */30 * * * * bash /root/cs-backup-dday.sh
+
   ## Daily Backup K/V at 1.00pm
   0 1 * * * bash /root/cs-backup-daily.sh
 
@@ -27,7 +30,9 @@ Schedule backup (snapshot) for consul key/value with cronjob
 
 ## Running Manual
 ```
+cd /root
 ./cs-backup-daily.sh
+./cs-backup-dday.sh
 ./cs-backup-weekly.sh
 ```
 

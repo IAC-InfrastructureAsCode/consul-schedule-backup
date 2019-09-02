@@ -37,10 +37,21 @@ run_export() {
   /usr/local/bin/consul kv export -token=$ENV_TOKEN / > $PATH_BACKUP/$SNAPSHOT_FILE.json
 }
 
+run_cloud_store(){
+  # Right here you can use AWS S3, GCP Object Storage, etc
+  # for better storing backup file & restore
+
+  # example AWS S3:
+  # ----------------
+  # aws s3 cp $PATH_BACKUP s3://bucket/ --recursive \
+  #  --exclude "*" --include "*.snap" --include "*.json"
+}
+
 main() {
   create_snapshot_folder
   run_snapshot
   run_export
+  run_cloud_store
 }
 
 ### START HERE ###
